@@ -1,0 +1,1 @@
+/* component when page not found */
