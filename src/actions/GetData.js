@@ -1,0 +1,1 @@
+/* action for getting initial data */

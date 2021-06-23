@@ -1,0 +1,1 @@
+/* action for authenticated user */
