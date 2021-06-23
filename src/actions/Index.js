@@ -1,5 +1,5 @@
 /* action for getting initial data */
-import { getInitialData } from '../data/api';
+import { getInitialData } from '../utils/api';
 
 import { receiveQuestions } from './Questions';
 import { receiveUsers } from './Users';
