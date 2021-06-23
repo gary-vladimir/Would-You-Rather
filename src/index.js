@@ -1,5 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { BrowserRouter } from 'react-router-dom';
+
 import App from './components/App';
 import reportWebVitals from './reportWebVitals';
 import './index.css';
@@ -11,9 +13,11 @@ import middleware from './middleware';
 const store = createStore(reducer, middleware);
 
 ReactDOM.render(
-    <Provider store={store}>
-        <App />
-    </Provider>,
+    <BrowserRouter>
+        <Provider store={store}>
+            <App />
+        </Provider>
+    </BrowserRouter>,
     document.getElementById('root')
 );
 // If you want to start measuring performance in your app, pass a function
