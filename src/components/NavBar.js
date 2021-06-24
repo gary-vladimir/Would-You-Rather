@@ -27,7 +27,11 @@ export function NavBar() {
 
     return (
         <Paper className={classes.root}>
-            <Tabs value={value} onChange={handleChange}>
+            <Tabs
+                value={value}
+                onChange={handleChange}
+                indicatorColor="primary"
+            >
                 <Tab
                     label="Dashboard"
                     component={Link}
