@@ -1,1 +1,33 @@
 /* styling */
+@import url('https://fonts.googleapis.com/css2?family=Sen&display=swap');
+body {
+    margin: 0px;
+    min-height: 100vh;
+    background-color: #16191b;
+}
+nav {
+    font-family: 'Sen', sans-serif;
+    background-color: #16191b;
+    height: 70px;
+    display: flex;
+    flex-direction: row;
+}
+#active {
+    color: white;
+    text-decoration: underline;
+    text-underline-offset: 5px;
+    text-decoration-thickness: 2px;
+}
+.navItem {
+    width: 150px;
+    height: 70px;
+    line-height: 70px;
+    text-align: center;
+    user-select: none;
+    color: #adb5bd;
+    text-decoration: none;
+    transition: 0.3s;
+}
+.navItem:hover {
+    color: white;
+}

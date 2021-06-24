@@ -11,6 +11,7 @@ import { Login } from './Login';
 import { LogOut } from './Logout';
 import { NotFound } from './404';
 import { Switch } from 'react-router-dom';
+import { NavBar } from './NavBar';
 
 class App extends Component {
     state = {};
@@ -21,6 +22,7 @@ class App extends Component {
     render() {
         return (
             <div>
+                <NavBar />
                 <Switch>
                     <Route exact path="/home" component={Dashboard}></Route>
                     <Route exact path="/add" component={NewQuestion}></Route>
