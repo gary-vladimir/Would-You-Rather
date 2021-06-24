@@ -1,21 +1,28 @@
 /* nav bar component */
 import { Component } from 'react';
-import { Link } from 'react-router-dom';
-import { useLocation } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 export class NavBar extends Component {
     render() {
         return (
             <nav>
-                <Link className="navItem" to="/home" id="active">
+                <NavLink
+                    className="navItem"
+                    to="/home"
+                    activeClassName="active"
+                >
                     Dashboard
-                </Link>
-                <Link className="navItem" to="/add">
+                </NavLink>
+                <NavLink className="navItem" to="/add" activeClassName="active">
                     Create Question
-                </Link>
-                <Link className="navItem" to="/leaderboard">
+                </NavLink>
+                <NavLink
+                    className="navItem"
+                    to="/leaderboard"
+                    activeClassName="active"
+                >
                     Leader Board
-                </Link>
+                </NavLink>
             </nav>
         );
     }

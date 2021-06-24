@@ -12,12 +12,6 @@ nav {
     display: flex;
     flex-direction: row;
 }
-#active {
-    color: white;
-    text-decoration: underline;
-    text-underline-offset: 5px;
-    text-decoration-thickness: 2px;
-}
 .navItem {
     width: 150px;
     height: 70px;
@@ -30,4 +24,10 @@ nav {
 }
 .navItem:hover {
     color: white;
+}
+.active {
+    color: white;
+    text-decoration: underline;
+    text-underline-offset: 5px;
+    text-decoration-thickness: 2px;
 }
