@@ -45,7 +45,7 @@ export function NavBar() {
             <Tabs
                 value={value}
                 onChange={handleChange}
-                indicatorColor="primary"
+                indicatorColor="secondary"
             >
                 <Tab
                     label="Dashboard"
