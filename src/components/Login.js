@@ -15,6 +15,7 @@ const useStyles = makeStyles((theme) => ({
         marginTop: theme.spacing(2),
     },
     title: {
+        fontSize: '25px',
         color: 'white',
         fontFamily: 'Montserrat',
         position: 'absolute',
@@ -25,7 +26,8 @@ const useStyles = makeStyles((theme) => ({
     select: {
         color: 'white',
         backgroundColor: '#212529',
-        width: '210px',
+        width: '330px',
+        fontSize: '30px',
     },
 }));
 
