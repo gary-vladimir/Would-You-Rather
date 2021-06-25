@@ -2,10 +2,8 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel';
-import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-import NativeSelect from '@material-ui/core/NativeSelect';
 
 const useStyles = makeStyles((theme) => ({
     formControl: {
@@ -19,11 +17,15 @@ const useStyles = makeStyles((theme) => ({
     title: {
         color: 'white',
         fontFamily: 'Montserrat',
+        position: 'absolute',
+        top: '40%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
     },
     select: {
         color: 'white',
         backgroundColor: '#212529',
-        width: '200px',
+        width: '210px',
     },
 }));
 
