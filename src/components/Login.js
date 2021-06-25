@@ -2,6 +2,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 
@@ -33,55 +34,33 @@ const useStyles = makeStyles((theme) => ({
 
 export function Login() {
     const classes = useStyles();
-    const [state, setState] = React.useState({
-        age: '',
-        name: 'hai',
-    });
+    const [user, setUser] = React.useState('');
 
     const handleChange = (event) => {
-        const name = event.target.name;
-        setState({
-            ...state,
-            [name]: event.target.value,
-        });
+        setUser(event.target.value);
+        console.log(user);
     };
+
     return (
         <div className={classes.title}>
             <h1 style={{ marginBottom: '-5px' }}>Please Log-In</h1>
             <FormControl className={classes.formControl}>
-                <InputLabel htmlFor="age-native-simple" color="secondary">
-                    User
+                <InputLabel id="demo-simple-select-label" color="secondary">
+                    Age
                 </InputLabel>
                 <Select
-                    color="secondary"
-                    className={classes.select}
-                    native
-                    value={state.age}
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    value={user}
                     onChange={handleChange}
-                    inputProps={{
-                        name: 'age',
-                        id: 'age-native-simple',
-                    }}
+                    className={classes.select}
+                    color="secondary"
                 >
-                    <option
-                        aria-label="None"
-                        value=""
-                        style={{ backgroundColor: '#16191b' }}
-                    />
-                    <option
-                        value={10}
-                        style={{
-                            backgroundColor: '#16191b',
-                        }}
-                    >
+                    <MenuItem classes={classes.item} value={'sarah'}>
                         Sarah
-                    </option>
-                    <option value={20} style={{ backgroundColor: '#16191b' }}>
-                        Tyler
-                    </option>
-                    <option value={30} style={{ backgroundColor: '#16191b' }}>
-                        Vladimir
-                    </option>
+                    </MenuItem>
+                    <MenuItem value={'tyler'}>Tyler</MenuItem>
+                    <MenuItem value={'john'}>John</MenuItem>
                 </Select>
             </FormControl>
         </div>
