@@ -6,6 +6,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import Button from '@material-ui/core/Button';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
     formControl: {
@@ -32,6 +33,9 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: '#212529',
         width: '330px',
         fontSize: '30px',
+    },
+    submit: {
+        color: 'white',
     },
 }));
 
@@ -69,7 +73,13 @@ export function Login() {
                     <MenuItem value={'john'}>John</MenuItem>
                 </Select>
             </FormControl>
-            <Button variant="contained" color="primary">
+            <Button
+                className={classes.submit}
+                component={Link}
+                to="/home"
+                variant="contained"
+                color="primary"
+            >
                 Submit
             </Button>
         </div>
