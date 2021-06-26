@@ -22,7 +22,10 @@ class App extends Component {
     render() {
         return (
             <div>
-                <NavBar />
+                <Route
+                    path={['/home', '/add', '/question', '/leaderboard']}
+                    component={NavBar}
+                />
                 <Switch>
                     <Route exact path="/home" component={Dashboard}></Route>
                     <Route exact path="/add" component={NewQuestion}></Route>
@@ -38,6 +41,7 @@ class App extends Component {
                     ></Route>
                     <Route exact path="/login" component={Login}></Route>
                     <Route exact path="/logout" component={LogOut}></Route>
+
                     <Route component={NotFound} />
                 </Switch>
             </div>
