@@ -55,7 +55,7 @@ export function NewQuestion() {
                             className: classes.textField,
                         }}
                         id="outlined-basic"
-                        label="Outlined"
+                        label="enter your input"
                         variant="outlined"
                     />
                 </form>
