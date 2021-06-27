@@ -4,6 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
 import { withStyles } from '@material-ui/styles';
+import { Button } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -38,6 +39,10 @@ const useStyles = makeStyles((theme) => ({
         marginBottom: '15px',
         display: 'flex',
         fontSize: '20px',
+    },
+    btn: {
+        marginTop: '20px',
+        width: '100%',
     },
 }));
 
@@ -122,6 +127,13 @@ export function NewQuestion() {
                         variant="outlined"
                     />
                 </form>
+                <Button
+                    variant="contained"
+                    color="primary"
+                    className={classes.btn}
+                >
+                    Submit Question
+                </Button>
             </Paper>
         </div>
     );
