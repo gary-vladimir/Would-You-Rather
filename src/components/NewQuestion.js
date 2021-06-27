@@ -33,6 +33,12 @@ const useStyles = makeStyles((theme) => ({
         width: '100%',
         color: 'white',
     },
+    splitLine: {
+        marginTop: '15px',
+        marginBottom: '15px',
+        display: 'flex',
+        fontSize: '20px',
+    },
 }));
 
 const CustomTextField = withStyles({
@@ -79,6 +85,40 @@ export function NewQuestion() {
                         }}
                         id="outlined-basic"
                         label="option 1"
+                        variant="outlined"
+                    />
+                </form>
+
+                <span className={classes.splitLine}>
+                    <span
+                        style={{
+                            transform: 'translatey(10px)',
+                            width: '48%',
+                            height: '1px',
+                            backgroundColor: '#6c757d',
+                        }}
+                    />
+                    <div style={{ marginRight: '15px', marginLeft: '15px' }}>
+                        OR
+                    </div>
+                    <span
+                        style={{
+                            transform: 'translatey(10px)',
+                            width: '48%',
+                            height: '1px',
+                            backgroundColor: '#6c757d',
+                        }}
+                    />
+                </span>
+
+                <form>
+                    <CustomTextField
+                        className={classes.textField}
+                        InputProps={{
+                            className: classes.textField,
+                        }}
+                        id="outlined-basic"
+                        label="option 2"
                         variant="outlined"
                     />
                 </form>
