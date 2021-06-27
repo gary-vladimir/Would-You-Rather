@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
         height: '400px',
         color: 'white',
         backgroundColor: '#16191b',
-        border: '1px solid #30363B',
+        border: '1px solid #6c757d',
         fontFamily: 'Montserrat',
         paddingLeft: '20px',
         paddingRight: '20px',
@@ -59,10 +59,10 @@ const CustomTextField = withStyles({
         },
         '& .MuiOutlinedInput-root': {
             '& fieldset': {
-                borderColor: '#30363B',
+                borderColor: '#6c757d',
             },
             '&:hover fieldset': {
-                borderColor: '#6c757d',
+                borderColor: '#adb5bd',
             },
             '&.Mui-focused fieldset': {
                 borderColor: '#3f51b5',
@@ -77,11 +77,11 @@ export function NewQuestion() {
     return (
         <div className={classes.root}>
             <Paper elevation={10} className={classes.container}>
-                <h1 style={{ textAlign: 'center', color: '#5969C5' }}>
+                <h1 style={{ textAlign: 'center', color: '#dee2e6' }}>
                     Create New Question
                 </h1>
-                <hr style={{ border: '1px solid #30363B' }} />
-                <h2 style={{ color: '#adb5bd' }}>Would you Rather...</h2>
+                <hr style={{ border: '1px solid #adb5bd' }} />
+                <h2 style={{ color: '#5969C5' }}>Would you Rather...</h2>
                 <form>
                     <CustomTextField
                         className={classes.textField}
@@ -103,7 +103,13 @@ export function NewQuestion() {
                             backgroundColor: '#6c757d',
                         }}
                     />
-                    <div style={{ marginRight: '15px', marginLeft: '15px' }}>
+                    <div
+                        style={{
+                            color: '#5969C5',
+                            marginRight: '15px',
+                            marginLeft: '15px',
+                        }}
+                    >
                         OR
                     </div>
                     <span
