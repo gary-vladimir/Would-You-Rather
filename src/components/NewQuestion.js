@@ -3,6 +3,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
+import { withStyles } from '@material-ui/styles';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -31,11 +32,33 @@ const useStyles = makeStyles((theme) => ({
     textField: {
         width: '100%',
         color: 'white',
-        borderColor: 'red',
-        outlineColor: 'red',
-        forcedColorAdjust: 'red',
     },
 }));
+
+const CustomTextField = withStyles({
+    root: {
+        '& label.Mui-focused': {
+            color: '#3f51b5',
+        },
+        '& label': {
+            color: '#6c757d',
+        },
+        '& .MuiInput-underline:after': {
+            borderBottomColor: '#30363B',
+        },
+        '& .MuiOutlinedInput-root': {
+            '& fieldset': {
+                borderColor: '#30363B',
+            },
+            '&:hover fieldset': {
+                borderColor: '#6c757d',
+            },
+            '&.Mui-focused fieldset': {
+                borderColor: '#3f51b5',
+            },
+        },
+    },
+})(TextField);
 
 export function NewQuestion() {
     const classes = useStyles();
@@ -49,13 +72,13 @@ export function NewQuestion() {
                 <hr style={{ border: '1px solid #30363B' }} />
                 <h2 style={{ color: '#adb5bd' }}>Would you Rather...</h2>
                 <form>
-                    <TextField
+                    <CustomTextField
                         className={classes.textField}
                         InputProps={{
                             className: classes.textField,
                         }}
                         id="outlined-basic"
-                        label="enter your input"
+                        label="option 1"
                         variant="outlined"
                     />
                 </form>
