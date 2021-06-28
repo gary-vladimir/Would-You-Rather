@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
         width: '700px',
         height: '400px',
         color: 'white',
-        backgroundColor: '#16191b',
+        backgroundColor: '#1E2125',
         border: '1px solid #6c757d',
         fontFamily: 'Montserrat',
         paddingLeft: '20px',
