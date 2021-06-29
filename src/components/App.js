@@ -7,7 +7,7 @@ import { Dashboard } from './Dashboard';
 import { NewQuestion } from './NewQuestion';
 import { QuestionPage } from './QuestionPage';
 import LeaderBoard from './LeaderBoard';
-import { Login } from './Login';
+import Login from './Login';
 import { LogOut } from './Logout';
 import { NotFound } from './404';
 import { Switch } from 'react-router-dom';
