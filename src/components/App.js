@@ -4,7 +4,7 @@ import { handleInitialData } from '../actions';
 import { Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Dashboard from './Dashboard';
-import { NewQuestion } from './NewQuestion';
+import NewQuestion from './NewQuestion';
 import { QuestionPage } from './QuestionPage';
 import LeaderBoard from './LeaderBoard';
 import Login from './Login';
