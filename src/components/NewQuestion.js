@@ -6,6 +6,7 @@ import TextField from '@material-ui/core/TextField';
 import { withStyles } from '@material-ui/styles';
 import { Button } from '@material-ui/core';
 import { connect } from 'react-redux';
+import { newQuestion } from '../actions/Questions';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -75,12 +76,16 @@ const CustomTextField = withStyles({
 function NewQuestion(props) {
     const classes = useStyles();
     const [option1, setUser] = React.useState('');
+    const [option2, setUser2] = React.useState('');
 
     const handleChange = (event) => {
         setUser(event.target.value);
     };
+    const handleChange2 = (event) => {
+        setUser2(event.target.value);
+    };
     console.log(option1);
-
+    console.log(option2);
     return (
         <div className={classes.root}>
             <Paper elevation={10} className={classes.container}>
@@ -139,17 +144,29 @@ function NewQuestion(props) {
                         id="outlined-basic"
                         label="option 2"
                         variant="outlined"
+                        onChange={handleChange2}
                     />
                 </form>
                 <Button
                     variant="contained"
                     color="primary"
                     className={classes.btn}
+                    onClick={() => {
+                        props.dispatch(newQuestion());
+                        console.log('submited');
+                    }}
                 >
                     Submit Question
                 </Button>
             </Paper>
         </div>
+    );
+}
+
+function generateId() {
+    return (
+        Math.random().toString(36).substring(2) +
+        new Date().getTime().toString(36)
     );
 }
 
