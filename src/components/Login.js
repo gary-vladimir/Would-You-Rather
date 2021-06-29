@@ -9,6 +9,7 @@ import Button from '@material-ui/core/Button';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { selectUser } from '../actions/AuthenticatedUser';
+import { CircularProgress } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
     formControl: {
@@ -39,6 +40,11 @@ const useStyles = makeStyles((theme) => ({
     submit: {
         color: 'white',
     },
+    loader: {
+        position: 'absolute',
+        top: '40%',
+        left: 'calc(50% - 20px)',
+    },
 }));
 
 function Login(props) {
@@ -49,47 +55,62 @@ function Login(props) {
         setUser(event.target.value);
     };
     console.log(user);
-
-    return (
-        <div className={classes.title}>
-            <h1 style={{ marginBottom: '-5px' }}>Please Log-In</h1>
-            <FormControl className={classes.formControl}>
-                <InputLabel
-                    id="demo-simple-select-label"
-                    style={{ color: 'white' }}
-                >
-                    User
-                </InputLabel>
-                <Select
-                    labelId="demo-simple-select-label"
-                    id="demo-simple-select"
-                    value={user}
-                    onChange={handleChange}
-                    className={classes.select}
+    if (props.users === null) {
+        return <CircularProgress color="primary" className={classes.loader} />;
+    } else {
+        return (
+            <div className={classes.title}>
+                <h1 style={{ marginBottom: '-5px' }}>Please Log-In</h1>
+                <FormControl className={classes.formControl}>
+                    <InputLabel
+                        id="demo-simple-select-label"
+                        style={{ color: 'white' }}
+                    >
+                        User
+                    </InputLabel>
+                    <Select
+                        labelId="demo-simple-select-label"
+                        id="demo-simple-select"
+                        value={user}
+                        onChange={handleChange}
+                        className={classes.select}
+                        color="primary"
+                    >
+                        {Object.keys(props.users).map((u) => {
+                            return (
+                                <MenuItem
+                                    key={props.users[u].id}
+                                    classes={classes.item}
+                                    value={props.users[u].id}
+                                >
+                                    {props.users[u].name}
+                                </MenuItem>
+                            );
+                        })}
+                    </Select>
+                </FormControl>
+                <Button
+                    onClick={() => {
+                        console.log('submited');
+                        props.dispatch(selectUser(user));
+                    }}
+                    className={classes.submit}
+                    component={Link}
+                    to="/home"
+                    variant="contained"
                     color="primary"
                 >
-                    <MenuItem classes={classes.item} value={'sarah'}>
-                        Sarah
-                    </MenuItem>
-                    <MenuItem value={'tyler'}>Tyler</MenuItem>
-                    <MenuItem value={'john'}>John</MenuItem>
-                </Select>
-            </FormControl>
-            <Button
-                onClick={() => {
-                    console.log('submited');
-                    console.log(props.dispatch(selectUser(user)));
-                }}
-                className={classes.submit}
-                component={Link}
-                to="/home"
-                variant="contained"
-                color="primary"
-            >
-                Submit
-            </Button>
-        </div>
-    );
+                    Submit
+                </Button>
+            </div>
+        );
+    }
 }
 
-export default connect(null)(Login);
+function mapStateToProps({ receiveUsers }) {
+    return {
+        users: receiveUsers,
+    };
+}
+
+export default connect(mapStateToProps)(Login);
