@@ -7,6 +7,8 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import Button from '@material-ui/core/Button';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { selectUser } from '../actions/AuthenticatedUser';
 
 const useStyles = makeStyles((theme) => ({
     formControl: {
@@ -39,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export function Login() {
+function Login(props) {
     const classes = useStyles();
     const [user, setUser] = React.useState('');
 
@@ -74,6 +76,10 @@ export function Login() {
                 </Select>
             </FormControl>
             <Button
+                onClick={() => {
+                    console.log('submited');
+                    console.log(props.dispatch(selectUser(user)));
+                }}
                 className={classes.submit}
                 component={Link}
                 to="/home"
@@ -85,3 +91,5 @@ export function Login() {
         </div>
     );
 }
+
+export default connect(null)(Login);
