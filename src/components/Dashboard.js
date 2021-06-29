@@ -54,6 +54,10 @@ const useStyles = makeStyles((theme) => ({
         right: '0px',
         top: '0px',
     },
+    notActive: {
+        backgroundColor: '#343a40',
+        color: '#adb5bd',
+    },
 }));
 function UserCard(classes, name) {
     return (
@@ -99,7 +103,11 @@ function Dashboard() {
                 <Button variant="contained" color="primary">
                     Unanswered
                 </Button>
-                <Button variant="contained" color="inherit">
+                <Button
+                    variant="contained"
+                    color="primary"
+                    className={classes.notActive}
+                >
                     Unanswered
                 </Button>
                 {UserCard(classes, 'Sarah Edo', '1', 4, 2, '#f6d27b')}
