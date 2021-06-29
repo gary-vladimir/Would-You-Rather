@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { handleInitialData } from '../actions';
 import { Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { Dashboard } from './Dashboard';
+import Dashboard from './Dashboard';
 import { NewQuestion } from './NewQuestion';
 import { QuestionPage } from './QuestionPage';
 import LeaderBoard from './LeaderBoard';
