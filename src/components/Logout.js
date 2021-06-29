@@ -1,8 +1,17 @@
 /* component for loggin out */
-import { Component } from 'react';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
+import { logoutUser } from '../actions/AuthenticatedUser';
 
-export class LogOut extends Component {
+class Logout extends Component {
+    componentDidMount() {
+        const { dispatch } = this.props;
+        dispatch(logoutUser(null));
+    }
     render() {
-        return <div>LogOut</div>;
+        return <Redirect to="/" />;
     }
 }
+
+export default connect(null)(Logout);
