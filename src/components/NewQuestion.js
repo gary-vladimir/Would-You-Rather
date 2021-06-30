@@ -7,6 +7,7 @@ import { withStyles } from '@material-ui/styles';
 import { Button } from '@material-ui/core';
 import { connect } from 'react-redux';
 import { newQuestion } from '../actions/Questions';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -148,11 +149,24 @@ function NewQuestion(props) {
                     />
                 </form>
                 <Button
+                    component={Link}
+                    to="/home"
                     variant="contained"
                     color="primary"
                     className={classes.btn}
                     onClick={() => {
-                        props.dispatch(newQuestion());
+                        const id = generateId();
+                        const question = {
+                            id: id,
+                            user: props.userIn,
+                            choice1: option1,
+                            choice2: option2,
+                            num_1: 0,
+                            num_2: 0,
+                            answers: {},
+                            timeStamp: new Date().getTime(),
+                        };
+                        props.dispatch(newQuestion(question));
                         console.log('submited');
                     }}
                 >
@@ -170,4 +184,10 @@ function generateId() {
     );
 }
 
-export default connect(null)(NewQuestion);
+function mapStateToProps({ selectUser }) {
+    return {
+        userIn: selectUser,
+    };
+}
+
+export default connect(mapStateToProps)(NewQuestion);
