@@ -1,15 +1,16 @@
-/* action for getting initial data */
-import { getInitialData } from '../utils/api';
-
-import { receiveQuestions } from './Questions';
+import { _getQuestions } from '../utils/api';
+import { _getUsers } from '../utils/api';
 import { receiveUsers } from './Users';
+import { receiveQuestions } from './Questions';
+import { showLoading, hideLoading } from 'react-redux-loading';
 
-export function handleInitialData() {
-    console.log('handleInitialData()');
+export function getInitialData() {
     return (dispatch) => {
-        return getInitialData().then(({ question, users }) => {
-            dispatch(receiveQuestions(question));
-            dispatch(receiveUsers(users));
+        dispatch(showLoading());
+        return Promise.all([_getQuestions(), _getUsers()]).then((values) => {
+            dispatch(receiveUsers(values[1]));
+            dispatch(receiveQuestions(values[0]));
+            dispatch(hideLoading());
         });
     };
 }
