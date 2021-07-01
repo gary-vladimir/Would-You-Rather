@@ -8,7 +8,7 @@ import Select from '@material-ui/core/Select';
 import Button from '@material-ui/core/Button';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { selectUser } from '../actions/AuthenticatedUser';
+import { setAuthedUser } from '../actions/AuthenticatedUser';
 import { CircularProgress } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
@@ -92,7 +92,7 @@ function Login(props) {
                 <Button
                     onClick={() => {
                         console.log('submited');
-                        props.dispatch(selectUser(user));
+                        props.dispatch(setAuthedUser(user));
                     }}
                     className={classes.submit}
                     component={Link}
@@ -107,9 +107,9 @@ function Login(props) {
     }
 }
 
-function mapStateToProps({ receiveUsers }) {
+function mapStateToProps({ users }) {
     return {
-        users: receiveUsers,
+        users: users,
     };
 }
 
