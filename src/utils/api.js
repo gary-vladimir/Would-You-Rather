@@ -2,7 +2,8 @@ let users = {
     sarahedo: {
         id: 'sarahedo',
         name: 'Sarah Edo',
-        avatarURL: './profile01.jpg',
+        avatarURL:
+            'https://cdn.iconscout.com/icon/free/png-512/avatar-373-456325.png',
         answers: {
             '8xf0y6ziyjabvozdd253nd': 'optionOne',
             '6ni6ok3ym7mf1p33lnez': 'optionTwo',
@@ -14,7 +15,8 @@ let users = {
     tylermcginnis: {
         id: 'tylermcginnis',
         name: 'Tyler McGinnis',
-        avatarURL: './profile02.jpg',
+        avatarURL:
+            'https://www.archeoares.it/wp-content/uploads/2020/12/avatar-man.png',
         answers: {
             vthrdm985a262al8qx3do: 'optionOne',
             xj352vofupe1dqz9emx13r: 'optionTwo',
@@ -24,7 +26,8 @@ let users = {
     johndoe: {
         id: 'johndoe',
         name: 'John Doe',
-        avatarURL: './profile03.jpg',
+        avatarURL:
+            'https://www.kavs.uniza.sk/images/Avatar_img/avatar-user-student-3e3e52aa56aeb627-512x512.png',
         answers: {
             xj352vofupe1dqz9emx13r: 'optionOne',
             vthrdm985a262al8qx3do: 'optionTwo',
