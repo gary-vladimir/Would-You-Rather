@@ -2,12 +2,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import { logoutUser } from '../actions/AuthenticatedUser';
+import { setAuthedUserToNull } from '../actions/AuthenticatedUser';
 
 class Logout extends Component {
     componentDidMount() {
         const { dispatch } = this.props;
-        dispatch(logoutUser(null));
+        dispatch(setAuthedUserToNull(null));
     }
     render() {
         return <Redirect to="/" />;

@@ -6,7 +6,7 @@ import TextField from '@material-ui/core/TextField';
 import { withStyles } from '@material-ui/styles';
 import { Button } from '@material-ui/core';
 import { connect } from 'react-redux';
-import { newQuestion } from '../actions/Questions';
+import { handleAddQuestion } from '../actions/Questions';
 import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
@@ -155,18 +155,7 @@ function NewQuestion(props) {
                     color="primary"
                     className={classes.btn}
                     onClick={() => {
-                        const id = generateId();
-                        const question = {
-                            id: id,
-                            user: props.userIn,
-                            choice1: option1,
-                            choice2: option2,
-                            num_1: 0,
-                            num_2: 0,
-                            answers: {},
-                            timeStamp: new Date().getTime(),
-                        };
-                        props.dispatch(newQuestion(question));
+                        props.dispatch(handleAddQuestion(option1, option2));
                         console.log('submited');
                     }}
                 >
@@ -174,13 +163,6 @@ function NewQuestion(props) {
                 </Button>
             </Paper>
         </div>
-    );
-}
-
-function generateId() {
-    return (
-        Math.random().toString(36).substring(2) +
-        new Date().getTime().toString(36)
     );
 }
 
