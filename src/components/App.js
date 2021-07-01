@@ -1,6 +1,6 @@
 /* App component */
 import React, { Component } from 'react';
-import { handleInitialData } from '../actions';
+import { getInitialData } from '../actions';
 import { Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Dashboard from './Dashboard';
@@ -17,7 +17,7 @@ class App extends Component {
     state = {};
     componentDidMount() {
         console.log('componentDidMount()');
-        this.props.dispatch(handleInitialData());
+        this.props.dispatch(getInitialData());
     }
     render() {
         return (
@@ -73,9 +73,9 @@ class App extends Component {
     }
 }
 
-function mapStateToProps({ selectUser }) {
+function mapStateToProps({ authedUser }) {
     return {
-        userIn: selectUser === null,
+        userIn: authedUser === null,
     };
 }
 
