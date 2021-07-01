@@ -159,8 +159,12 @@ function NewQuestion(props) {
                     color="primary"
                     className={classes.btn}
                     onClick={() => {
-                        props.dispatch(handleAddQuestion(option1, option2));
-                        console.log('submited');
+                        if (!(option1 === '' || option2 === '')) {
+                            props.dispatch(handleAddQuestion(option1, option2));
+                            console.log('submited');
+                        } else {
+                            console.log('form was empty');
+                        }
                     }}
                 >
                     Submit Question
