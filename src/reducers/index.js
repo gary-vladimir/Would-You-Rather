@@ -1,11 +1,13 @@
 /* index reducer */
 import { combineReducers } from 'redux';
-import selectUser from './AuthenticatedUser';
-import receiveUsers from './Users';
-import question from './Questions';
+import authedUser from './AuthenticatedUser';
+import users from './Users';
+import questions from './Questions';
+import { loadingBarReducer } from 'react-redux-loading';
 
 export default combineReducers({
-    selectUser,
-    receiveUsers,
-    question,
+    authedUser,
+    users,
+    questions,
+    loadingBar: loadingBarReducer,
 });
