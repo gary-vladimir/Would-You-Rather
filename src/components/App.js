@@ -11,7 +11,7 @@ import Login from './Login';
 import LogOut from './Logout';
 import { NotFound } from './404';
 import { Switch } from 'react-router-dom';
-import { NavBar } from './NavBar';
+import NavBar from './NavBar';
 
 class App extends Component {
     state = {};
