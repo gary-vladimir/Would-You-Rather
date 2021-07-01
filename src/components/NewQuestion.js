@@ -97,6 +97,8 @@ function NewQuestion(props) {
                 <h2 style={{ color: '#5969C5' }}>Would you Rather...</h2>
                 <form>
                     <CustomTextField
+                        spellCheck="false"
+                        autoComplete="off"
                         className={classes.textField}
                         InputProps={{
                             className: classes.textField,
@@ -138,6 +140,8 @@ function NewQuestion(props) {
 
                 <form>
                     <CustomTextField
+                        spellCheck="false"
+                        autoComplete="off"
                         className={classes.textField}
                         InputProps={{
                             className: classes.textField,
