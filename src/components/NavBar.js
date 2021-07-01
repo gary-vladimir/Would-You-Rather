@@ -34,6 +34,7 @@ const useStyles = makeStyles({
 });
 
 function NavBar(props) {
+    let avatarImg = props.users[props.authedUserId].avatarURL;
     const classes = useStyles();
     const [value, setValue] = React.useState(0);
 
@@ -75,12 +76,11 @@ function NavBar(props) {
                     <ExitToAppIcon style={{ fontSize: '40px' }}></ExitToAppIcon>
                 </Button>
                 <Avatar
+                    src={avatarImg}
                     style={{
                         backgroundColor: '#0077b6',
                     }}
-                >
-                    G
-                </Avatar>
+                ></Avatar>
                 <div className={classes.name}>
                     {props.users[props.authedUserId].name}
                 </div>
