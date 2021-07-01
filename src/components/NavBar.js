@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 import Avatar from '@material-ui/core/Avatar';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import { Button } from '@material-ui/core';
+import { connect } from 'react-redux';
 
 const useStyles = makeStyles({
     root: {
@@ -32,7 +33,7 @@ const useStyles = makeStyles({
     },
 });
 
-export function NavBar() {
+function NavBar(props) {
     const classes = useStyles();
     const [value, setValue] = React.useState(0);
 
@@ -80,8 +81,17 @@ export function NavBar() {
                 >
                     G
                 </Avatar>
-                <div className={classes.name}>Gary Nuñez</div>
+                <div className={classes.name}>
+                    {props.users[props.authedUserId].name}
+                </div>
             </div>
         </Paper>
     );
 }
+function mapStateToProps({ authedUser, users }) {
+    return {
+        authedUserId: authedUser.id,
+        users: users,
+    };
+}
+export default connect(mapStateToProps)(NavBar);
