@@ -55,14 +55,25 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-function UserCard(classes, name, position, answeredQ, askedQ, color) {
+function UserCard(
+    classes,
+    name,
+    avatarImg,
+    position,
+    answeredQ,
+    askedQ,
+    color
+) {
+    if (color === undefined) {
+        color = '#5969c5';
+    }
     return (
         <Card className={classes.card}>
             <div style={{ width: '200px', position: 'relative' }}>
                 <strong style={{ color: `${color}`, fontSize: '50px' }}>
                     #{position}
                 </strong>
-                <Avatar className={classes.avatar}></Avatar>
+                <Avatar src={avatarImg} className={classes.avatar}></Avatar>
                 <div className={classes.lineBreak}></div>
             </div>
             <div
@@ -116,17 +127,43 @@ function UserCard(classes, name, position, answeredQ, askedQ, color) {
     );
 }
 
-function LeaderBoard() {
+function LeaderBoard(props) {
+    const ids = props.leaderIds;
+    const users = props.users;
     const classes = useStyles();
+    const colors = ['#f6d27b', '#C0C0C0', '#CD7F32'];
     return (
         <div className={classes.root}>
             <Paper elevation={10} className={classes.container}>
-                {UserCard(classes, 'Sarah Edo', '1', 4, 2, '#f6d27b')}
-                {UserCard(classes, 'John', '2', 3, 2, '#C0C0C0')}
-                {UserCard(classes, 'Vladimir', '3', 2, 2, '#cd7f32')}
+                {ids.map((element, index) =>
+                    UserCard(
+                        classes,
+                        users[element].name,
+                        users[element].avatarURL,
+                        index + 1,
+                        Object.keys(props.users[element].answers).length,
+                        users[element].questions.length,
+                        colors[index]
+                    )
+                )}
             </Paper>
         </div>
     );
 }
 
-export default connect(null)(LeaderBoard);
+function mapStateToProps({ users }) {
+    return {
+        leaderIds: Object.keys(users).sort((firstElement, secondElement) => {
+            let user2 =
+                Object.keys(users[secondElement].answers).length +
+                Object.keys(users[secondElement].questions).length;
+            let user1 =
+                Object.keys(users[firstElement].answers).length +
+                Object.keys(users[firstElement].questions).length;
+            return user2 - user1;
+        }),
+        users,
+    };
+}
+
+export default connect(mapStateToProps)(LeaderBoard);
