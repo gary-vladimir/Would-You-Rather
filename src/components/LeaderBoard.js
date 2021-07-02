@@ -68,7 +68,7 @@ function UserCard(
         color = '#5969c5';
     }
     return (
-        <Card className={classes.card}>
+        <Card className={classes.card} key={name}>
             <div style={{ width: '200px', position: 'relative' }}>
                 <strong style={{ color: `${color}`, fontSize: '50px' }}>
                     #{position}
