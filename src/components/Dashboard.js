@@ -97,9 +97,15 @@ function UserCard(classes, name, avatarImg, id) {
 }
 
 function Dashboard(props) {
-    let state = {
-        activeMode: 'unanswered',
+    const [mode, setMode] = React.useState('Unanswered');
+
+    const changeToUnanswered = () => {
+        setMode('Unanswered');
     };
+    const changeToAnswered = () => {
+        setMode('answered');
+    };
+    console.log(mode);
 
     const answeredQuestionsIds = props.answeredQuestions;
     const allQuestions = props.questions;
@@ -116,10 +122,7 @@ function Dashboard(props) {
                 <Button
                     variant="contained"
                     color="primary"
-                    onClick={() => {
-                        console.log('change to unanswered');
-                        state.activeMode = 'unanswered';
-                    }}
+                    onClick={changeToUnanswered}
                 >
                     Unanswered
                 </Button>
@@ -127,15 +130,12 @@ function Dashboard(props) {
                     variant="contained"
                     color="primary"
                     className={classes.notActive}
-                    onClick={() => {
-                        console.log('change to answered');
-                        state.activeMode = 'answered';
-                    }}
+                    onClick={changeToAnswered}
                 >
                     Answered
                 </Button>
                 {Object.keys(allQuestions).map(function (key, index) {
-                    if (state.activeMode === 'unanswered') {
+                    if (mode === 'Unanswered') {
                         // show unanswered questions
                         if (
                             !answeredQuestionsIds.some((e) =>
