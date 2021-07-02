@@ -97,36 +97,76 @@ function UserCard(classes, name, avatarImg, id) {
 }
 
 function Dashboard(props) {
-    const answeredQuestions = props.answeredQuestions;
+    let state = {
+        activeMode: 'unanswered',
+    };
+
+    const answeredQuestionsIds = props.answeredQuestions;
     const allQuestions = props.questions;
     const allUsers = props.users;
 
     console.log(allUsers);
-    console.log(answeredQuestions);
+    console.log(answeredQuestionsIds);
     console.log(allQuestions);
 
     const classes = useStyles();
     return (
         <div className={classes.root}>
             <Paper elevation={10} className={classes.container}>
-                <Button variant="contained" color="primary">
+                <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={() => {
+                        console.log('change to unanswered');
+                        state.activeMode = 'unanswered';
+                    }}
+                >
                     Unanswered
                 </Button>
                 <Button
                     variant="contained"
                     color="primary"
                     className={classes.notActive}
+                    onClick={() => {
+                        console.log('change to answered');
+                        state.activeMode = 'answered';
+                    }}
                 >
                     Answered
                 </Button>
-                {answeredQuestions.map((element) =>
-                    UserCard(
-                        classes,
-                        allUsers[allQuestions[element].author].name,
-                        allUsers[allQuestions[element].author].avatarURL,
-                        element
-                    )
-                )}
+                {Object.keys(allQuestions).map(function (key, index) {
+                    if (state.activeMode === 'unanswered') {
+                        // show unanswered questions
+                        if (
+                            !answeredQuestionsIds.some((e) =>
+                                allQuestions[key].id.includes(e)
+                            )
+                        ) {
+                            let author = allQuestions[key].author;
+                            return UserCard(
+                                classes,
+                                allUsers[author].name,
+                                allUsers[author].avatarURL,
+                                allQuestions[key].id
+                            );
+                        }
+                    } else {
+                        // show answered questions
+                        if (
+                            answeredQuestionsIds.some((e) =>
+                                allQuestions[key].id.includes(e)
+                            )
+                        ) {
+                            let author = allQuestions[key].author;
+                            return UserCard(
+                                classes,
+                                allUsers[author].name,
+                                allUsers[author].avatarURL,
+                                allQuestions[key].id
+                            );
+                        }
+                    }
+                })}
             </Paper>
         </div>
     );
