@@ -62,13 +62,24 @@ function UserCard(
     position,
     answeredQ,
     askedQ,
-    color
+    color,
+    authedUser
 ) {
     if (color === undefined) {
         color = '#5969c5';
     }
+    let backgroundColor;
+    if (authedUser === true) {
+        backgroundColor = '#0c1f33';
+    } else {
+        backgroundColor = '#1E2125';
+    }
     return (
-        <Card className={classes.card} key={name}>
+        <Card
+            className={classes.card}
+            style={{ backgroundColor: backgroundColor }}
+            key={name}
+        >
             <div style={{ width: '200px', position: 'relative' }}>
                 <strong style={{ color: `${color}`, fontSize: '50px' }}>
                     #{position}
@@ -128,6 +139,7 @@ function UserCard(
 }
 
 function LeaderBoard(props) {
+    const authedUser = props.authedUser.id;
     const ids = props.leaderIds;
     const users = props.users;
     const classes = useStyles();
@@ -143,7 +155,10 @@ function LeaderBoard(props) {
                         index + 1,
                         Object.keys(props.users[element].answers).length,
                         users[element].questions.length,
-                        colors[index]
+                        colors[index],
+                        users[authedUser].name === users[element].name
+                            ? true
+                            : false
                     )
                 )}
             </Paper>
@@ -151,7 +166,7 @@ function LeaderBoard(props) {
     );
 }
 
-function mapStateToProps({ users }) {
+function mapStateToProps({ users, authedUser }) {
     return {
         leaderIds: Object.keys(users).sort((firstElement, secondElement) => {
             let user2 =
@@ -163,6 +178,7 @@ function mapStateToProps({ users }) {
             return user2 - user1;
         }),
         users,
+        authedUser,
     };
 }
 
