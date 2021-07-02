@@ -59,11 +59,12 @@ const useStyles = makeStyles((theme) => ({
         color: '#adb5bd',
     },
 }));
-function UserCard(classes, name) {
+
+function UserCard(classes, name, avatarImg, id) {
     return (
-        <Card className={classes.card}>
+        <Card key={id} className={classes.card}>
             <div style={{ width: '200px', position: 'relative' }}>
-                <Avatar className={classes.avatar}></Avatar>
+                <Avatar src={avatarImg} className={classes.avatar}></Avatar>
                 <div className={classes.lineBreak}></div>
             </div>
             <div
@@ -95,7 +96,15 @@ function UserCard(classes, name) {
     );
 }
 
-function Dashboard() {
+function Dashboard(props) {
+    const answeredQuestions = props.answeredQuestions;
+    const allQuestions = props.questions;
+    const allUsers = props.users;
+
+    console.log(allUsers);
+    console.log(answeredQuestions);
+    console.log(allQuestions);
+
     const classes = useStyles();
     return (
         <div className={classes.root}>
@@ -108,14 +117,31 @@ function Dashboard() {
                     color="primary"
                     className={classes.notActive}
                 >
-                    Unanswered
+                    Answered
                 </Button>
-                {UserCard(classes, 'Sarah Edo', '1', 4, 2, '#f6d27b')}
-                {UserCard(classes, 'John', '2', 3, 2, '#C0C0C0')}
-                {UserCard(classes, 'Vladimir', '3', 2, 2, '#cd7f32')}
+                {answeredQuestions.map((element) =>
+                    UserCard(
+                        classes,
+                        allUsers[allQuestions[element].author].name,
+                        allUsers[allQuestions[element].author].avatarURL,
+                        element
+                    )
+                )}
             </Paper>
         </div>
     );
 }
+function mapStateToProps({ questions, users, authedUser }) {
+    let answeredQuestions = {};
+    Object.keys(authedUser).length !== 0 && Object.keys(users).length !== 0
+        ? (answeredQuestions = Object.keys(users[authedUser.id]['answers']))
+        : (answeredQuestions = {});
 
-export default connect(null)(Dashboard);
+    return {
+        answeredQuestions,
+        questions,
+        users,
+    };
+}
+
+export default connect(mapStateToProps)(Dashboard);
