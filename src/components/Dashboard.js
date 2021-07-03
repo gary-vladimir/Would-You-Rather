@@ -115,6 +115,14 @@ function Dashboard(props) {
     console.log(answeredQuestionsIds);
     console.log(allQuestions);
 
+    const orderedQuestionsIds = Object.keys(allQuestions).sort(
+        (firstElement, secondElement) =>
+            allQuestions[secondElement].timestamp -
+            allQuestions[firstElement].timestamp
+    );
+
+    console.log(orderedQuestionsIds);
+
     const classes = useStyles();
     return (
         <div className={classes.root}>
@@ -135,7 +143,7 @@ function Dashboard(props) {
                 >
                     Answered
                 </Button>
-                {Object.keys(allQuestions).map(function (key, index) {
+                {orderedQuestionsIds.map(function (key, index) {
                     if (mode === 'Unanswered') {
                         // show unanswered questions
                         if (
