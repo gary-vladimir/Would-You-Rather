@@ -120,6 +120,7 @@ function Dashboard(props) {
         <div className={classes.root}>
             <Paper elevation={10} className={classes.container}>
                 <Button
+                    className={mode === 'answered' ? classes.notActive : ''}
                     variant="contained"
                     color="primary"
                     onClick={changeToUnanswered}
@@ -129,7 +130,7 @@ function Dashboard(props) {
                 <Button
                     variant="contained"
                     color="primary"
-                    className={classes.notActive}
+                    className={mode === 'Unanswered' ? classes.notActive : ''}
                     onClick={changeToAnswered}
                 >
                     Answered
