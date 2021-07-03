@@ -60,7 +60,9 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-function UserCard(classes, name, avatarImg, id) {
+function UserCard(classes, name, avatarImg, id, timestamp) {
+    console.log(timestamp);
+    let date = new Date(timestamp);
     return (
         <Card key={id} className={classes.card}>
             <div style={{ width: '200px', position: 'relative' }}>
@@ -91,6 +93,19 @@ function UserCard(classes, name, avatarImg, id) {
                 >
                     View Poll
                 </Button>
+            </div>
+            <div
+                style={{
+                    width: '215px',
+                    marginTop: '15px',
+                    textAlign: 'right',
+                }}
+            >
+                {date.getDate() +
+                    '/' +
+                    (date.getMonth() + 1) +
+                    '/' +
+                    date.getFullYear()}
             </div>
         </Card>
     );
@@ -156,7 +171,8 @@ function Dashboard(props) {
                                 classes,
                                 allUsers[author].name,
                                 allUsers[author].avatarURL,
-                                allQuestions[key].id
+                                allQuestions[key].id,
+                                allQuestions[key].timestamp
                             );
                         }
                     } else {
@@ -171,7 +187,8 @@ function Dashboard(props) {
                                 classes,
                                 allUsers[author].name,
                                 allUsers[author].avatarURL,
-                                allQuestions[key].id
+                                allQuestions[key].id,
+                                allQuestions[key].timestamp
                             );
                         }
                     }
