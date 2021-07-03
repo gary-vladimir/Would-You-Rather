@@ -6,6 +6,7 @@ import { Card } from '@material-ui/core';
 import { Avatar } from '@material-ui/core';
 import { connect } from 'react-redux';
 import { Button } from '@material-ui/core';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -62,6 +63,7 @@ const useStyles = makeStyles((theme) => ({
 
 function UserCard(classes, name, avatarImg, id, timestamp) {
     console.log(timestamp);
+    let url = '/question/:id' + id;
     let date = new Date(timestamp);
     return (
         <Card key={id} className={classes.card}>
@@ -87,6 +89,8 @@ function UserCard(classes, name, avatarImg, id, timestamp) {
                 />
                 <h4 style={{ color: 'gainsboro' }}>Would you Rather?</h4>
                 <Button
+                    component={Link}
+                    to={url}
                     variant="contained"
                     color="primary"
                     style={{ marginBottom: '20px' }}
