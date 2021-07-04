@@ -35,6 +35,19 @@ const useStyles = makeStyles((theme) => ({
     activeBtn: {
         backgroundColor: '#3d8c62',
     },
+    resultsOptions: {
+        position: 'relative',
+        marginTop: '20px',
+        height: '50px',
+        width: '80%',
+        backgroundColor: '#343a40',
+    },
+    resultOptionText: {
+        position: 'absolute',
+        zIndex: '2',
+        top: '15px',
+        left: '10px',
+    },
 }));
 
 function QuestionPage(props) {
@@ -63,6 +76,18 @@ function QuestionPage(props) {
     const timeStamp = allQuestions[idOfQuestion].timestamp;
     let date = new Date(timeStamp);
 
+    const totalVotePercentage =
+        allQuestions[idOfQuestion].optionOne.votes.length +
+        allQuestions[idOfQuestion].optionTwo.votes.length;
+    const option1VotePercentage = Math.trunc(
+        (allQuestions[idOfQuestion].optionOne.votes.length * 100) /
+            totalVotePercentage
+    );
+    const option2VotePercentage = Math.trunc(
+        (allQuestions[idOfQuestion].optionTwo.votes.length * 100) /
+            totalVotePercentage
+    );
+
     return (
         <Card className={classes.card}>
             <div style={{ position: 'absolute', right: '10px', top: '10px' }}>
@@ -78,35 +103,84 @@ function QuestionPage(props) {
             ></Avatar>
             <p>{nameOfPersonAsking} asks:</p>
             <p style={{ fontSize: '2em' }}>Would you Rather...</p>
-            <Button
-                style={{ width: '80%' }}
-                variant="contained"
-                className={userOpinion === 'optionOne' ? classes.activeBtn : ''}
-                onClick={userOpinionToOptionOne}
-            >
-                {option1}
-            </Button>
-            <p>OR</p>
-            <Button
-                style={{ width: '80%' }}
-                variant="contained"
-                className={userOpinion === 'optionTwo' ? classes.activeBtn : ''}
-                onClick={userOpinionToOptionTwo}
-            >
-                {option2}
-            </Button>
-            <Button
-                variant="contained"
-                color="primary"
-                className={classes.btn}
-                style={{ marginTop: '20px' }}
-                onClick={() => {
-                    console.log('submited');
-                    props.dispatch(handleAddAnswer(userOpinion, idOfQuestion));
-                }}
-            >
-                Submit Opinion
-            </Button>
+            {/* if the authed user is in any of the votes array that are located in the all questions
+            if yes it's going to render the results and if not it's going to show the buttons */}
+            {allQuestions[idOfQuestion].optionOne.votes.includes(
+                props.authedUserId
+            ) ||
+            allQuestions[idOfQuestion].optionTwo.votes.includes(
+                props.authedUserId
+            ) ? (
+                <React.Fragment>
+                    <div>results:</div>
+                    <div className={classes.resultsOptions}>
+                        <div className={classes.resultOptionText}>
+                            {option1}: {option1VotePercentage}%
+                        </div>
+                        <div
+                            style={{
+                                height: '100%',
+                                backgroundColor: '#c40046',
+                                width: `${option1VotePercentage}%`,
+                                position: 'absolute',
+                                top: '0px',
+                            }}
+                        ></div>
+                    </div>
+                    <div className={classes.resultsOptions}>
+                        <div className={classes.resultOptionText}>
+                            {option2}: {option2VotePercentage}%
+                        </div>
+                        <div
+                            style={{
+                                height: '100%',
+                                backgroundColor: '#c40046',
+                                width: `${option2VotePercentage}%`,
+                                position: 'absolute',
+                                top: '0px',
+                            }}
+                        ></div>
+                    </div>
+                </React.Fragment>
+            ) : (
+                <React.Fragment>
+                    <Button
+                        style={{ width: '80%' }}
+                        variant="contained"
+                        className={
+                            userOpinion === 'optionOne' ? classes.activeBtn : ''
+                        }
+                        onClick={userOpinionToOptionOne}
+                    >
+                        {option1}
+                    </Button>
+                    <p>OR</p>
+                    <Button
+                        style={{ width: '80%' }}
+                        variant="contained"
+                        className={
+                            userOpinion === 'optionTwo' ? classes.activeBtn : ''
+                        }
+                        onClick={userOpinionToOptionTwo}
+                    >
+                        {option2}
+                    </Button>
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        className={classes.btn}
+                        style={{ marginTop: '20px' }}
+                        onClick={() => {
+                            console.log('submited');
+                            props.dispatch(
+                                handleAddAnswer(userOpinion, idOfQuestion)
+                            );
+                        }}
+                    >
+                        Submit Opinion
+                    </Button>
+                </React.Fragment>
+            )}
         </Card>
     );
 }
