@@ -1,9 +1,10 @@
+// questions reducer
 import {
     RECEIVE_QUESTIONS,
     ADD_QUESTION,
     ADD_ANSWER,
 } from '../actions/Questions';
-
+// handle switch cases for action types
 export default function questions(state = {}, action) {
     switch (action.type) {
         case RECEIVE_QUESTIONS:

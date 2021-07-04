@@ -8,7 +8,7 @@ import Avatar from '@material-ui/core/Avatar';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import { Button } from '@material-ui/core';
 import { connect } from 'react-redux';
-
+// styles
 const useStyles = makeStyles({
     root: {
         flexGrow: 1,
@@ -33,6 +33,7 @@ const useStyles = makeStyles({
     },
 });
 
+// nav bar
 function NavBar(props) {
     let avatarImg = props.users[props.authedUserId].avatarURL;
     const classes = useStyles();

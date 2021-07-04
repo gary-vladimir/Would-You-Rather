@@ -10,7 +10,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { setAuthedUser } from '../actions/AuthenticatedUser';
 import { CircularProgress } from '@material-ui/core';
-
+// styles
 const useStyles = makeStyles((theme) => ({
     formControl: {
         margin: theme.spacing(1),
@@ -49,8 +49,9 @@ const useStyles = makeStyles((theme) => ({
 
 function Login(props) {
     const classes = useStyles();
+    // use React.UseState to save the selected user
     const [user, setUser] = React.useState('');
-
+    // function that interacts with the state
     const handleChange = (event) => {
         setUser(event.target.value);
     };

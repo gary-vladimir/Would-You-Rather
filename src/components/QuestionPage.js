@@ -6,7 +6,7 @@ import { Avatar } from '@material-ui/core';
 import { connect } from 'react-redux';
 import { Button } from '@material-ui/core';
 import { handleAddAnswer } from '../actions/Questions';
-
+// styles
 const useStyles = makeStyles((theme) => ({
     card: {
         fontFamily: 'Montserrat',
@@ -52,9 +52,9 @@ const useStyles = makeStyles((theme) => ({
 
 function QuestionPage(props) {
     const classes = useStyles();
-
+    // React.UseState to save user selection
     const [userOpinion, setUserOpinion] = React.useState('');
-
+    // fnctions to change the state
     const userOpinionToOptionOne = () => {
         setUserOpinion('optionOne');
     };
@@ -63,11 +63,10 @@ function QuestionPage(props) {
     };
 
     console.log(userOpinion);
-
+    // getting all necesary data
     const allUsers = props.users;
     const allQuestions = props.questions;
     const idOfQuestion = props.match.params.id.substring(3);
-
     const nameOfPersonAsking = allUsers[allQuestions[idOfQuestion].author].name;
     const avatarOfPersonAsking =
         allUsers[allQuestions[idOfQuestion].author].avatarURL;
@@ -75,7 +74,7 @@ function QuestionPage(props) {
     const option2 = allQuestions[idOfQuestion].optionTwo.text;
     const timeStamp = allQuestions[idOfQuestion].timestamp;
     let date = new Date(timeStamp);
-
+    // getting the vote percentage of each options
     const totalVotePercentage =
         allQuestions[idOfQuestion].optionOne.votes.length +
         allQuestions[idOfQuestion].optionTwo.votes.length;
@@ -91,6 +90,7 @@ function QuestionPage(props) {
     return (
         <Card className={classes.card}>
             <div style={{ position: 'absolute', right: '10px', top: '10px' }}>
+                {/* code to format the date */}
                 {date.getDate() +
                     '/' +
                     (date.getMonth() + 1) +
@@ -103,8 +103,8 @@ function QuestionPage(props) {
             ></Avatar>
             <p>{nameOfPersonAsking} asks:</p>
             <p style={{ fontSize: '2em' }}>Would you Rather...</p>
-            {/* if the authed user is in any of the votes array that are located in the all questions
-            if yes it's going to render the results and if not it's going to show the buttons */}
+            {/* if the authed user has already voted, show results, if not
+            show options to allow vote */}
             {allQuestions[idOfQuestion].optionOne.votes.includes(
                 props.authedUserId
             ) ||

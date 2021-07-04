@@ -5,7 +5,7 @@ import Paper from '@material-ui/core/Paper';
 import { Card } from '@material-ui/core';
 import { Avatar } from '@material-ui/core';
 import { connect } from 'react-redux';
-
+// styles
 const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
@@ -54,7 +54,8 @@ const useStyles = makeStyles((theme) => ({
         top: '0px',
     },
 }));
-
+// function recives name, avatarImg, position, answeredQuestions, askedQuestions
+// color and authed User, and returns a card UI
 function UserCard(
     classes,
     name,
@@ -65,9 +66,11 @@ function UserCard(
     color,
     authedUser
 ) {
+    // if not gold, silver or bronze then use this color
     if (color === undefined) {
         color = '#5969c5';
     }
+    // code to make the "user player" background highlighted in the leaderboard
     let backgroundColor;
     if (authedUser === true) {
         backgroundColor = '#0c1f33';
@@ -139,10 +142,12 @@ function UserCard(
 }
 
 function LeaderBoard(props) {
+    // getting data from props
     const authedUser = props.authedUser.id;
     const ids = props.leaderIds;
     const users = props.users;
     const classes = useStyles();
+    // gold silver and bronze colors
     const colors = ['#f6d27b', '#C0C0C0', '#CD7F32'];
     return (
         <div className={classes.root}>

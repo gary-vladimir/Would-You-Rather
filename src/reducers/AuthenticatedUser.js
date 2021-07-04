@@ -1,4 +1,4 @@
-/* Authenticated User reducer */
+// reducer in charge of handling the authed user
 import { SET_AUTHED_USER } from '../actions/AuthenticatedUser';
 import { SET_AUTHED_USER_TO_NULL } from '../actions/AuthenticatedUser';
 

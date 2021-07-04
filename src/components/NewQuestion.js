@@ -8,7 +8,7 @@ import { Button } from '@material-ui/core';
 import { connect } from 'react-redux';
 import { handleAddQuestion } from '../actions/Questions';
 import { Link } from 'react-router-dom';
-
+// styles
 const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
@@ -48,7 +48,7 @@ const useStyles = makeStyles((theme) => ({
         width: '100%',
     },
 }));
-
+// custom text field
 const CustomTextField = withStyles({
     root: {
         '& label.Mui-focused': {
@@ -76,9 +76,10 @@ const CustomTextField = withStyles({
 
 function NewQuestion(props) {
     const classes = useStyles();
+    // react.UseState to save the user input text for both options
     const [option1, setUser] = React.useState('');
     const [option2, setUser2] = React.useState('');
-
+    // functions to interact with the state
     const handleChange = (event) => {
         setUser(event.target.value);
     };
@@ -87,6 +88,7 @@ function NewQuestion(props) {
     };
     console.log(option1);
     console.log(option2);
+
     return (
         <div className={classes.root}>
             <Paper elevation={10} className={classes.container}>
@@ -159,6 +161,7 @@ function NewQuestion(props) {
                     color="primary"
                     className={classes.btn}
                     onClick={() => {
+                        // validate if form was empty
                         if (!(option1 === '' || option2 === '')) {
                             props.dispatch(handleAddQuestion(option1, option2));
                             console.log('submited');

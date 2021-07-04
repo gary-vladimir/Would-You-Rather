@@ -1,4 +1,5 @@
 /* Home page */
+// importing libraries
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
@@ -7,7 +8,7 @@ import { Avatar } from '@material-ui/core';
 import { connect } from 'react-redux';
 import { Button } from '@material-ui/core';
 import { Link } from 'react-router-dom';
-
+// styles
 const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
@@ -60,7 +61,8 @@ const useStyles = makeStyles((theme) => ({
         color: '#adb5bd',
     },
 }));
-
+// function that recives classes name avatarImg id and timestamp
+// and returns the html for a "Card"
 function UserCard(classes, name, avatarImg, id, timestamp) {
     console.log(timestamp);
     let url = '/question/:id' + id;
@@ -116,16 +118,18 @@ function UserCard(classes, name, avatarImg, id, timestamp) {
 }
 
 function Dashboard(props) {
+    // used react.useState to toggle between answered and Unanswered questions
     const [mode, setMode] = React.useState('Unanswered');
-
+    // functions that change the mode of the react.useState
     const changeToUnanswered = () => {
         setMode('Unanswered');
     };
     const changeToAnswered = () => {
         setMode('answered');
     };
-    console.log(mode);
 
+    console.log(mode);
+    // getting data from the store
     const answeredQuestionsIds = props.answeredQuestions;
     const allQuestions = props.questions;
     const allUsers = props.users;
@@ -133,14 +137,12 @@ function Dashboard(props) {
     console.log(allUsers);
     console.log(answeredQuestionsIds);
     console.log(allQuestions);
-
+    // function to order the questions by timestamp
     const orderedQuestionsIds = Object.keys(allQuestions).sort(
         (firstElement, secondElement) =>
             allQuestions[secondElement].timestamp -
             allQuestions[firstElement].timestamp
     );
-
-    console.log(orderedQuestionsIds);
 
     const classes = useStyles();
     return (
@@ -201,6 +203,7 @@ function Dashboard(props) {
         </div>
     );
 }
+// getting the answeredQuestions, all questions, and all users
 function mapStateToProps({ questions, users, authedUser }) {
     let answeredQuestions = {};
     Object.keys(authedUser).length !== 0 && Object.keys(users).length !== 0

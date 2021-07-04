@@ -1,9 +1,10 @@
+// users reducer
 import {
     RECEIVE_USERS,
     ADD_ANSWER_TO_USERS,
     ADD_QUESTION_TO_USERS,
 } from '../actions/Users';
-
+// handle switch cases for action type
 export default function users(state = {}, action) {
     switch (action.type) {
         case RECEIVE_USERS:

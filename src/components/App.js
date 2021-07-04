@@ -22,10 +22,12 @@ class App extends Component {
     render() {
         return (
             <div>
+                {/* if there is no authed user, show login page */}
                 {this.props.userIn === true ? (
                     <Route path="/" component={Login}></Route>
                 ) : (
                     <React.Fragment>
+                        {/* how navbar in every page except 404 and login */}
                         <Route
                             path={[
                                 '/home',
@@ -62,7 +64,7 @@ class App extends Component {
                                 path="/logout"
                                 component={LogOut}
                             ></Route>
-
+                            {/* 404 */}
                             <Redirect exact from="/" to="/home" />
                             <Route component={NotFound} />
                         </Switch>
@@ -72,7 +74,7 @@ class App extends Component {
         );
     }
 }
-
+// checking if ther is an authedUser
 function mapStateToProps({ authedUser }) {
     return {
         userIn: authedUser === null,

@@ -2,7 +2,7 @@
 import { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@material-ui/core';
-
+// 404 page
 export class NotFound extends Component {
     render() {
         return (
