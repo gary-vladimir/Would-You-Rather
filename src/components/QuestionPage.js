@@ -6,6 +6,7 @@ import { Avatar } from '@material-ui/core';
 import { connect } from 'react-redux';
 import { Button } from '@material-ui/core';
 import { handleAddAnswer } from '../actions/Questions';
+import { Redirect } from 'react-router';
 // styles
 const useStyles = makeStyles((theme) => ({
     card: {
@@ -66,7 +67,13 @@ function QuestionPage(props) {
     // getting all necesary data
     const allUsers = props.users;
     const allQuestions = props.questions;
+    // in case the id of question is not in questions
+    // it will redirect to a 404 page
     const idOfQuestion = props.match.params.id.substring(3);
+    if (allQuestions[idOfQuestion] === undefined) {
+        return <Redirect to="/404"></Redirect>;
+    }
+
     const nameOfPersonAsking = allUsers[allQuestions[idOfQuestion].author].name;
     const avatarOfPersonAsking =
         allUsers[allQuestions[idOfQuestion].author].avatarURL;
