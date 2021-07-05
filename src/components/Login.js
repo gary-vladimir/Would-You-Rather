@@ -96,8 +96,6 @@ function Login(props) {
                         props.dispatch(setAuthedUser(user));
                     }}
                     className={classes.submit}
-                    component={Link}
-                    to="/home"
                     variant="contained"
                     color="primary"
                 >
