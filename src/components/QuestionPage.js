@@ -75,18 +75,22 @@ function QuestionPage(props) {
     const timeStamp = allQuestions[idOfQuestion].timestamp;
     let date = new Date(timeStamp);
     // getting the vote percentage of each options
-    const totalVotePercentage =
-        allQuestions[idOfQuestion].optionOne.votes.length +
-        allQuestions[idOfQuestion].optionTwo.votes.length;
+    const option1Votes = allQuestions[idOfQuestion].optionOne.votes.length;
+    const option2Votes = allQuestions[idOfQuestion].optionTwo.votes.length;
+    const totalVotePercentage = option1Votes + option2Votes;
     const option1VotePercentage = Math.trunc(
-        (allQuestions[idOfQuestion].optionOne.votes.length * 100) /
-            totalVotePercentage
+        (option1Votes * 100) / totalVotePercentage
     );
     const option2VotePercentage = Math.trunc(
-        (allQuestions[idOfQuestion].optionTwo.votes.length * 100) /
-            totalVotePercentage
+        (option2Votes * 100) / totalVotePercentage
     );
 
+    const userVotedOne = allQuestions[idOfQuestion].optionOne.votes.includes(
+        props.authedUserId
+    );
+    const userVotedTwo = allQuestions[idOfQuestion].optionTwo.votes.includes(
+        props.authedUserId
+    );
     return (
         <Card className={classes.card}>
             <div style={{ position: 'absolute', right: '10px', top: '10px' }}>
@@ -105,17 +109,22 @@ function QuestionPage(props) {
             <p style={{ fontSize: '2em' }}>Would you Rather...</p>
             {/* if the authed user has already voted, show results, if not
             show options to allow vote */}
-            {allQuestions[idOfQuestion].optionOne.votes.includes(
-                props.authedUserId
-            ) ||
-            allQuestions[idOfQuestion].optionTwo.votes.includes(
-                props.authedUserId
-            ) ? (
+            {userVotedOne || userVotedTwo ? (
                 <React.Fragment>
                     <div>results:</div>
                     <div className={classes.resultsOptions}>
                         <div className={classes.resultOptionText}>
-                            {option1}: {option1VotePercentage}%
+                            1.- {option1}: {option1VotePercentage}%
+                        </div>
+                        <div
+                            style={{
+                                position: 'absolute',
+                                right: '10px',
+                                top: '15px',
+                            }}
+                        >
+                            votes:
+                            {option1Votes}
                         </div>
                         <div
                             style={{
@@ -129,7 +138,17 @@ function QuestionPage(props) {
                     </div>
                     <div className={classes.resultsOptions}>
                         <div className={classes.resultOptionText}>
-                            {option2}: {option2VotePercentage}%
+                            2.- {option2}: {option2VotePercentage}%
+                        </div>
+                        <div
+                            style={{
+                                position: 'absolute',
+                                right: '10px',
+                                top: '15px',
+                            }}
+                        >
+                            votes:
+                            {option2Votes}
                         </div>
                         <div
                             style={{
@@ -140,6 +159,9 @@ function QuestionPage(props) {
                                 top: '0px',
                             }}
                         ></div>
+                    </div>
+                    <div style={{ marginTop: '20px', fontSize: '32px' }}>
+                        You Voted option {userVotedOne ? '1' : '2'}
                     </div>
                 </React.Fragment>
             ) : (
